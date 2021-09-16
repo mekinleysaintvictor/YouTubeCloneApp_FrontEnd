@@ -30,11 +30,13 @@ class App extends Component {
         return ( 
             <div>
                 <h1>Hello World</h1>
-                <h1>
-                    {this.state.videoCommentsFromAPI.map(remark => {
-                        return <h2>{remark.comment}</h2>
+                <div>
+                    {this.state.videoCommentsFromAPI.map((video) => {
+                        return(
+                         <h1>{video.comment}</h1>
+                        )
                     })}
-                </h1>
+                </div>
             </div>
          );
     }
