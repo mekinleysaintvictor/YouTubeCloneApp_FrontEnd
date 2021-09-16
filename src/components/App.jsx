@@ -1,45 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Comments from './Comments/Comments';
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            videos: [],
-            videoCommentsFromAPI: []
-         }
-    }
 
-    componentDidMount(){
-        this.getAllComments();
-    }
+export default function App() {
+    const [videoCommentsFromApi, setVideoCommentsFromApi ] = useState([])                                               
 
-    async getAllComments(){
+    useEffect(() => {
+        getAllComments();
+    },[]);
+
+    async function getAllComments() {
         let response = await axios.get('http://127.0.0.1:8000/video/');
         console.log(response.data[0].comment);
         console.log(response.data);
-        this.setState({
-            videoCommentsFromApI: response.data
-        })
+        setVideoCommentsFromApi(response.data)
     }
 
 
 
-    render() { 
         return ( 
             <div>
                 <h1>Hello World</h1>
                 <div>
-                    {this.state.videoCommentsFromAPI.map((video) => {
+                    {console.log("State data: ", videoCommentsFromApi)}
+                    {videoCommentsFromApi.map((video, index) => {
                         return(
-                         <h1>{video.comment}</h1>
+                         <h1 key={index}>{video.comment}</h1>
                         )
                     })}
                 </div>
             </div>
          );
-    }
 }
  
-export default App;
