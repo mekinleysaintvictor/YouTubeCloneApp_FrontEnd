@@ -5,7 +5,8 @@ import SearchBar from './SearchBar/SearchBar';
 
 
 export default function App() {
-    const [videoCommentsFromApi, setVideoCommentsFromApi ] = useState([])                                               
+    const [videoCommentsFromApi, setVideoCommentsFromApi ] = useState([]) 
+    const [videoList, setVideoList] = useState([])                                              
 
     useEffect(() => {
         getAllComments();
@@ -18,6 +19,10 @@ export default function App() {
         setVideoCommentsFromApi(response.data)
     }
 
+    async function getVideos() {
+        let response = await axios.get('');
+        setVideoList(response.data)
+    }
 
 
         return ( 
