@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Comments from './Comments/Comments';
+import SearchBar from './SearchBar/SearchBar';
 
 
 export default function App() {
@@ -20,17 +21,20 @@ export default function App() {
 
 
         return ( 
-            <div>
-                <h1>Hello World</h1>
+            <React.Fragment>
+                <SearchBar />
                 <div>
-                    {console.log("State data: ", videoCommentsFromApi)}
-                    {videoCommentsFromApi.map((video, index) => {
-                        return(
-                         <h1 key={index}>{video.comment}</h1>
-                        )
-                    })}
+                    <h1>Hello World</h1>
+                    <div>
+                        {console.log("State data: ", videoCommentsFromApi)}
+                        {videoCommentsFromApi.map((video, index) => {
+                            return(
+                            <h1 key={index}>{video.comment}</h1>
+                            )
+                        })}
+                    </div>
                 </div>
-            </div>
+            </React.Fragment>
          );
 }
  
