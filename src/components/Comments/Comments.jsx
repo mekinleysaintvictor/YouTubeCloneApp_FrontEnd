@@ -14,7 +14,7 @@ const Comments = (props) => {
  
 export default Comments;
 
-<div>
+{/* <div>
 <h1>Hello World</h1>
 <div>
     {console.log("State data: ", videoCommentsFromApi)}
@@ -24,4 +24,4 @@ export default Comments;
         )
     })}
 </div>
-</div>
+</div> */}
