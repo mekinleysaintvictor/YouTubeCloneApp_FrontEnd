@@ -1,35 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Comments from './Comments/Comments';
+import VideoPlayer from './VideoPlayer/VideoPlayer';
 
 
 export default function App() {
-    const [videoCommentsFromApi, setVideoCommentsFromApi ] = useState([])                                               
+    const [currentVideos, setCurrentVideos] = useState();
 
     useEffect(() => {
-        getAllComments();
-    },[]);
+        getVideos();
+    }, []);
 
-    async function getAllComments() {
-        let response = await axios.get('http://127.0.0.1:8000/video/');
-        console.log(response.data[0].comment);
-        console.log(response.data);
-        setVideoCommentsFromApi(response.data)
+    async function getVideos() {
+        let response = await axios.get('https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCrTjQbJJbEpM-hxo52_KwxOt3v0mKGm3U&part=snippet&type=video&maxResults=5');
+        console.log("API YOUTUBE:", response.data);
+        setCurrentVideos(response.data);
     }
-
-
 
         return ( 
             <div>
                 <h1>Hello World</h1>
-                <div>
-                    {console.log("State data: ", videoCommentsFromApi)}
-                    {videoCommentsFromApi.map((video, index) => {
-                        return(
-                         <h1 key={index}>{video.comment}</h1>
-                        )
-                    })}
-                </div>
+                <VideoPlayer/>
+                <Comments/>
             </div>
          );
 }
