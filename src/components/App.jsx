@@ -4,6 +4,7 @@ import Comments from './Comments/Comments';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
 import VideoTable from './VideoTable/VideoTable';
 import Videos from './Videos/Videos';
+import SearchBar from './SearchBar/SearchBar';
 
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
         return ( 
             <div>
                 <h1>Hello World</h1>
+                <SearchBar/>
                 <VideoPlayer/>
                 <VideoTable mapVideos={() => mapVideos()} />
                 <Comments/>
