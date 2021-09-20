@@ -37,7 +37,7 @@ export default function App() {
                 return video.snippet.title.toLowerCase().includes(search.toLocaleLowerCase())
             })
         )
-    })
+    }, [search, videos])
 
     useEffect(() => {
         let mounted = true;
@@ -45,7 +45,7 @@ export default function App() {
             getVideos();
         }
         return () => mounted = false;
-    }, [search, videos])
+    }, [])
 
         return ( 
             <div>
