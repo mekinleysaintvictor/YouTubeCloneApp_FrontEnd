@@ -1,14 +1,19 @@
 import React from "react";
+import './VideoTable.css'
 
 const VideoTable = (props) => {
     return ( 
-        <table className="table">
+        <table>
             <thead>
-                <tr>
-                    <th>Video Title: </th>
-                </tr>
+                <th>Vidoes</th>
             </thead>
-            {props.mapVideos()}
+            <tbody>
+                {props.videos.map((item =>
+                    <tr key={item.id.videoId} className="container">
+                        <td>{item.snippet.title}</td>  
+                    </tr>
+                ))}
+            </tbody>
         </table>
      );
 }

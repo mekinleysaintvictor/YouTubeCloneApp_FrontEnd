@@ -9,13 +9,15 @@ import SearchBar from './SearchBar/SearchBar';
 
 export default function App() {
     const [videos, setVideos] = useState([]);
+    const [search, setSearch] = useState('');
+    const [filteredVideos, setFilteredVideos] = useState([]);
 
     useEffect(() => {
         getVideos();
     }, []);
 
     async function getVideos() {
-        let response = await axios.get('https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCrTjQbJJbEpM-hxo52_KwxOt3v0mKGm3U&part=snippet&type=video&maxResults=5');
+        let response = await axios.get('https://www.googleapis.com/youtube/v3/search?q=lofi+hiphop&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5');
         console.log("API YOUTUBE:", response.data.items);
         setVideos(response.data.items);
     }
@@ -30,19 +32,27 @@ export default function App() {
     }
 
     useEffect(() => {
+        setFilteredVideos(
+            videos.filter(video => {
+                return video.snippet.title.toLowerCase().includes(search.toLocaleLowerCase())
+            })
+        )
+    })
+
+    useEffect(() => {
         let mounted = true;
         if(mounted){
             getVideos();
         }
         return () => mounted = false;
-    }, [])
+    }, [search, videos])
 
         return ( 
             <div>
                 <h1>Hello World</h1>
-                <SearchBar/>
+                <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
                 <VideoPlayer/>
-                <VideoTable mapVideos={() => mapVideos()} />
+                <VideoTable videos = {filteredVideos} />
                 <Comments/>
             </div>
          );
