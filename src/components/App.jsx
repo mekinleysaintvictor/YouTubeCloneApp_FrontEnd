@@ -9,8 +9,8 @@ import SearchBar from './SearchBar/SearchBar';
 
 export default function App() {
     const [videos, setVideos] = useState([]);
-    const [filteredVideo, setFilteredVideos] = useState("zeldasport");
-    const [selectedVideo, setSelectedVideo] = useState(videos[0]);
+    const [search, setSearch] = useState('');
+    const [filteredVideos, setFilteredVideos] = useState([]);
 
     // useEffect(() => {
     //     axios.get(`https://www.googleapis.com/youtube/v3/search?q=${filteredVideo}&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5/`).
@@ -33,6 +33,14 @@ export default function App() {
     }
     
     useEffect(() => {
+        setFilteredVideos(
+            videos.filter(video => {
+                return video.snippet.title.toLowerCase().includes(search.toLocaleLowerCase())
+            })
+        )
+    }, [search, videos])
+
+    useEffect(() => {
         let mounted = true;
         if(mounted){
             getVideos();
@@ -44,10 +52,10 @@ export default function App() {
             <React.Fragment>
             <div>
                 <h1>Hello World</h1>
-                <SearchBar />
-                <VideoPlayer video={videos[0]}/>
-                <VideoTable mapVideos={() => mapVideos()} />
-                <Comments />
+                <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
+                <VideoPlayer/>
+                <VideoTable videos = {filteredVideos} />
+                <Comments/>
             </div>
             </React.Fragment>  
          );
