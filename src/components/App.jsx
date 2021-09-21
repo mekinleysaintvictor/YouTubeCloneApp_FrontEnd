@@ -18,7 +18,7 @@ export default function App() {
     // }, []);
 
     async function getVideos() {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${filteredVideo}&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5`);
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=lofi+hiphop&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5`);
         console.log("API YOUTUBE:", response.data.items);
         setVideos(response.data.items);
     }
@@ -53,7 +53,7 @@ export default function App() {
             <div>
                 <h1>Hello World</h1>
                 <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
-                <VideoPlayer/>
+                <VideoPlayer video="2DVpys50LVE" />
                 <VideoTable videos = {filteredVideos} />
                 <Comments/>
             </div>
