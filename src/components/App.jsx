@@ -13,6 +13,7 @@ export default function App() {
     const [videos, setVideos] = useState([]); //related videos
     const [search, setSearch] = useState('');
     const [filteredVideos, setFilteredVideos] = useState([]);
+    const [isLoading, setIsLoading] = useState(false)
     const [selectVideo, setSelectVideo] = useState([])
 
 
@@ -30,18 +31,13 @@ export default function App() {
         />    
         )
     }
-    // function userSelectedVideo(videoId){
-    //     let clickedVideo = videos.filter((item) => {
-    //         if (item.id.videoId === videoId) {
-    //             return true;
-    //         } else {
-    //             return false;
-    //         }
-    //     });
-    //     console.log('selected video', clickedVideo);
-    //     setSelectVideo(clickedVideo);
+    function userSelectedVideo(videoId){
+        console.log('videoId', videoId)
+        let clickedVideo = videoId;
+        console.log('selected video', clickedVideo);
+        setSelectVideo(clickedVideo);
         // udpdate state variable selectedVideo
-    // }
+    }
     
     useEffect(() => {
         setFilteredVideos(
@@ -64,8 +60,8 @@ export default function App() {
             <div>
                 <h1>Hello World</h1>
                 <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
-                <VideoPlayer video={filteredVideos[0]} />
-                <VideoTable videos = {filteredVideos}  />
+                <VideoPlayer video={selectVideo} />
+                <VideoTable videos = {filteredVideos} userSelectedVideo={userSelectedVideo} />
                 <Comments/>
             </div>
             </React.Fragment>  

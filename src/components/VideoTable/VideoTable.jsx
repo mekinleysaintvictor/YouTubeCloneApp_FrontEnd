@@ -11,8 +11,8 @@ const VideoTable = (props) => {
                 {props.videos.map((item =>
                     <tr key={item.id.videoId} className="container" >
                         <td>{item.snippet.title}</td>
-                        <td><img src={item.snippet.thumbnails.default.url}></img></td>
-                        <td>{item.snippet.description}</td>
+                        <td onClick={props.userSelectedVideo(item.id.videoId)}><img src={item.snippet.thumbnails.default.url}></img></td>
+                        
                         
                     </tr>
                 ))}
