@@ -8,21 +8,19 @@ import SearchBar from './SearchBar/SearchBar';
 
 
 export default function App() {
-    const [videos, setVideos] = useState([]);
+    
+    const [selectedVideo, setSelectedVideo] = useState('2DVpys50LVE');
+    const [videos, setVideos] = useState([]); //related videos
     const [search, setSearch] = useState('');
     const [filteredVideos, setFilteredVideos] = useState([]);
 
-    // useEffect(() => {
-    //     axios.get(`https://www.googleapis.com/youtube/v3/search?q=${filteredVideo}&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5/`).
-    //     then(response => setVideos(response.data.items))
-    // }, []);
 
     async function getVideos() {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=lofi+hiphop&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5`);
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyCrTjQbJJbEpM-hxo52_KwxOt3v0mKGm3U&part=snippet&type=video,contentDetails,statistics,status&maxResults=5&relatedToVideoId=${selectedVideo}`);
         console.log("API YOUTUBE:", response.data.items);
         setVideos(response.data.items);
     }
-
+    
     function mapVideos(){
         return videos.map(video =>
         <Videos
@@ -30,6 +28,12 @@ export default function App() {
             video={video}
         />    
         )
+    }
+
+    function userSelectedVideo(videoId){
+        //update state variable selectedVideo
+        // const videoId = video.id.videoId
+        setSelectedVideo(videoId);
     }
     
     useEffect(() => {
@@ -52,8 +56,8 @@ export default function App() {
             <React.Fragment>
             <div>
                 <h1>Hello World</h1>
-                <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
-                <VideoPlayer video="2DVpys50LVE" />
+                <SearchBar handleChange={(event) => setSearch(event.target.value)} />
+                <VideoPlayer video={selectedVideo} />
                 <VideoTable videos = {filteredVideos} />
                 <Comments/>
             </div>
