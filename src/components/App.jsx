@@ -15,6 +15,7 @@ export default function App() {
     const [filteredVideos, setFilteredVideos] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
     const [selectVideo, setSelectVideo] = useState([])
+    const [selectDescription, setSelectDescription] = useState([])
 
 
     async function getVideos() {
@@ -38,6 +39,12 @@ export default function App() {
         setSelectVideo(clickedVideo);
         // udpdate state variable selectedVideo
     }
+
+    function userSelectedVideoDesc (video) {
+        let clickedDescription = video;
+        setSelectDescription(clickedDescription);
+
+    }
     
     useEffect(() => {
         setFilteredVideos(
@@ -60,8 +67,8 @@ export default function App() {
             <div>
                 <h1>Hello World</h1>
                 <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
-                <VideoPlayer video={selectVideo} />
-                <VideoTable videos = {filteredVideos} userSelectedVideo={userSelectedVideo} />
+                <VideoPlayer video={selectVideo} description={selectDescription}/>
+                <VideoTable videos = {filteredVideos} userSelectedVideo={userSelectedVideo} userSelectedVideoDesc={userSelectedVideoDesc}/>
                 <Comments/>
             </div>
             </React.Fragment>  

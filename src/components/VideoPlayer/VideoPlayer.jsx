@@ -15,6 +15,9 @@ const VideoPlayer = (props) => {
                         frameBorder="0">
                     </iframe>
                 </div>
+                <h2>Video Description</h2>
+                    <div>{props.description}</div>
+                
         </div>
      );
 }

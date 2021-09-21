@@ -3,7 +3,7 @@ import './VideoTable.css'
 
 const VideoTable = (props) => {
     return ( 
-        <table>
+        <table className="float-right">
             <thead>
                 <th>Vidoes</th>
             </thead>
@@ -12,6 +12,7 @@ const VideoTable = (props) => {
                     <tr key={item.id.videoId} className="container" >
                         <td>{item.snippet.title}</td>
                         <td onClick={props.userSelectedVideo(item.id.videoId)}><img src={item.snippet.thumbnails.default.url}></img></td>
+                        <td onClick={props.userSelectedVideoDesc(item.snippet.description)}></td>
                         
                         
                     </tr>
