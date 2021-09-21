@@ -9,13 +9,16 @@ import SearchBar from './SearchBar/SearchBar';
 
 export default function App() {
     const [videos, setVideos] = useState([]);
+    const [filteredVideo, setFilteredVideos] = useState("zeldasport");
+    const [selectedVideo, setSelectedVideo] = useState(videos[0]);
 
-    useEffect(() => {
-        getVideos();
-    }, []);
+    // useEffect(() => {
+    //     axios.get(`https://www.googleapis.com/youtube/v3/search?q=${filteredVideo}&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5/`).
+    //     then(response => setVideos(response.data.items))
+    // }, []);
 
     async function getVideos() {
-        let response = await axios.get('https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCrTjQbJJbEpM-hxo52_KwxOt3v0mKGm3U&part=snippet&type=video&maxResults=5');
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${filteredVideo}&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5`);
         console.log("API YOUTUBE:", response.data.items);
         setVideos(response.data.items);
     }
@@ -28,7 +31,7 @@ export default function App() {
         />    
         )
     }
-
+    
     useEffect(() => {
         let mounted = true;
         if(mounted){
@@ -38,13 +41,15 @@ export default function App() {
     }, [])
 
         return ( 
+            <React.Fragment>
             <div>
                 <h1>Hello World</h1>
-                <SearchBar/>
-                <VideoPlayer/>
+                <SearchBar />
+                <VideoPlayer video={videos[0]}/>
                 <VideoTable mapVideos={() => mapVideos()} />
-                <Comments/>
+                <Comments />
             </div>
+            </React.Fragment>  
          );
 }
  
