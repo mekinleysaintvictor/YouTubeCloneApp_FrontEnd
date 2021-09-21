@@ -24,14 +24,7 @@ export default function App() {
         setVideos(response.data.items);
     }
     
-    function mapVideos(){
-        return videos.map(video =>
-        <Videos
-            key={video.id}
-            video={video}
-        />    
-        )
-    }
+
     function userSelectedVideo(videoId){
         console.log('videoId', videoId)
         let clickedVideo = videoId;
@@ -65,7 +58,6 @@ export default function App() {
         return ( 
             <React.Fragment>
             <div>
-                <h1>Hello World</h1>
                 <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
                 <VideoPlayer video={selectVideo} description={selectDescription}/>
                 <VideoTable videos = {filteredVideos} userSelectedVideo={userSelectedVideo} userSelectedVideoDesc={userSelectedVideoDesc}/>
