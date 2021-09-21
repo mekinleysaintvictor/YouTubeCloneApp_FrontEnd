@@ -11,6 +11,7 @@ export default function App() {
     const [videos, setVideos] = useState([]);
     const [search, setSearch] = useState('');
     const [filteredVideos, setFilteredVideos] = useState([]);
+    const [selectVideo, setSelectVideo] = useState([])
 
     // useEffect(() => {
     //     axios.get(`https://www.googleapis.com/youtube/v3/search?q=${filteredVideo}&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5/`).
@@ -31,6 +32,18 @@ export default function App() {
         />    
         )
     }
+    // function userSelectedVideo(videoId){
+    //     let clickedVideo = videos.filter((item) => {
+    //         if (item.id.videoId === videoId) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     });
+    //     console.log('selected video', clickedVideo);
+    //     setSelectVideo(clickedVideo);
+        // udpdate state variable selectedVideo
+    // }
     
     useEffect(() => {
         setFilteredVideos(
@@ -53,8 +66,8 @@ export default function App() {
             <div>
                 <h1>Hello World</h1>
                 <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
-                <VideoPlayer video="2DVpys50LVE" />
-                <VideoTable videos = {filteredVideos} />
+                <VideoPlayer video={filteredVideos[0]} />
+                <VideoTable videos = {filteredVideos}  />
                 <Comments/>
             </div>
             </React.Fragment>  
