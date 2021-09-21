@@ -12,12 +12,13 @@ export default function App() {
     const [search, setSearch] = useState('');
     const [filteredVideos, setFilteredVideos] = useState([]);
 
-    useEffect(() => {
-        getVideos();
-    }, []);
+    // useEffect(() => {
+    //     axios.get(`https://www.googleapis.com/youtube/v3/search?q=${filteredVideo}&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5/`).
+    //     then(response => setVideos(response.data.items))
+    // }, []);
 
     async function getVideos() {
-        let response = await axios.get('https://www.googleapis.com/youtube/v3/search?q=lofi+hiphop&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5');
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=lofi+hiphop&key=AIzaSyDFM6QVMnwTGTMFkgjKVdLvVjD6laVtSAI&part=snippet&type=video&maxResults=5`);
         console.log("API YOUTUBE:", response.data.items);
         setVideos(response.data.items);
     }
@@ -30,7 +31,7 @@ export default function App() {
         />    
         )
     }
-
+    
     useEffect(() => {
         setFilteredVideos(
             videos.filter(video => {
@@ -48,13 +49,15 @@ export default function App() {
     }, [])
 
         return ( 
+            <React.Fragment>
             <div>
                 <h1>Hello World</h1>
                 <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
-                <VideoPlayer/>
+                <VideoPlayer video="2DVpys50LVE" />
                 <VideoTable videos = {filteredVideos} />
                 <Comments/>
             </div>
+            </React.Fragment>  
          );
 }
  
