@@ -9,8 +9,11 @@ const VideoTable = (props) => {
             </thead>
             <tbody>
                 {props.videos.map((item =>
-                    <tr key={item.id.videoId} className="container">
-                        <td>{item.snippet.title}</td>  
+                    <tr key={item.id.videoId} className="container" onClick={item.id.videoId}>
+                        <td>{item.snippet.title}</td>
+                        <td><img src={item.snippet.thumbnails.default.url}></img></td>
+                        <td>{item.snippet.description}</td>
+                        
                     </tr>
                 ))}
             </tbody>
