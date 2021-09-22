@@ -21,10 +21,13 @@ const Comments = (props) => {
             {console.log("State data: ", videoCommentsFromApi)}
                 {videoCommentsFromApi.map((video, index) => {
                     return(
-                        <p key={index}>{video.comment}</p>
+                        <><p key={index}>{video.comment}</p><input type="text" placeholder="reply..."></input></>
                     )
                 })}
-                <input type="text" placeholder="comment here..."></input>
+                <div>
+                    <input type="text" placeholder="comment here..."></input>
+                </div>
+               
         </div>
      );
 }
