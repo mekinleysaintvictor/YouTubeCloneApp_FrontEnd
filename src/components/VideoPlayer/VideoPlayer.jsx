@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
+import './VideoPlayer.css'
 
 const VideoPlayer = (props) => {
     //const for current video
@@ -8,17 +9,21 @@ const VideoPlayer = (props) => {
     console.log('whats props', props.video)
     //contains embedded video player
     return ( 
-        <div className="videoPlayer">
+        <center>
+        <div className="container">
                 <div>
                     <iframe id="ytplayer" type="text/html" width="640" height="360"
                         src={`https://www.youtube.com/embed/${props.video}/`}
                         frameBorder="0">
                     </iframe>
                 </div>
-                <h2>Video Description</h2>
+                <div className="card bg-danger text-white">
+                <h2 className="text-center">Video Description</h2>
                     <div>{props.description}</div>
+                </div>
                 
         </div>
+        </center>
      );
 }
  

@@ -3,7 +3,8 @@ import './VideoTable.css'
 
 const VideoTable = (props) => {
     return ( 
-        <table className="float-right">
+        <center>
+        <table>
             <thead>
                 <th>Vidoes</th>
             </thead>
@@ -19,6 +20,7 @@ const VideoTable = (props) => {
                 ))}
             </tbody>
         </table>
+        </center>
      );
 }
  
