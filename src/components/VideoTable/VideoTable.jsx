@@ -5,7 +5,7 @@ const VideoTable = (props) => {
     return ( 
         <table>
             <thead>
-                <th>Vidoes</th>
+                <th>Videos</th>
             </thead>
             <tbody>
                 {props.videos.map((item =>

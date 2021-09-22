@@ -9,14 +9,14 @@ import SearchBar from './SearchBar/SearchBar';
 
 export default function App() {
     
-    const [selectedVideo, setSelectedVideo] = useState('2DVpys50LVE');
-    const [videos, setVideos] = useState([]); //related videos
-    const [search, setSearch] = useState('');
-    const [filteredVideos, setFilteredVideos] = useState([]);
+    const [selectedVideo, setSelectedVideo] = useState('2DVpys50LVE'); //selected video using video id, also requests our videos based on related search, mainly for vidplayer
+    const [videos, setVideos] = useState([]); //related videos from our api search 
+    const [search, setSearch] = useState(''); //searches through our existing 'box' of videos
+    const [filteredVideos, setFilteredVideos] = useState([]); //returns search based on our 'box' of videos
 
 
     async function getVideos() {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyCrTjQbJJbEpM-hxo52_KwxOt3v0mKGm3U&part=snippet&type=video,contentDetails,statistics,status&maxResults=5&relatedToVideoId=${selectedVideo}`);
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyCrTjQbJJbEpM-hxo52_KwxOt3v0mKGm3U&part=snippet&type=video,contentDetails,statistics,status&q=${search}`);
         console.log("API YOUTUBE:", response.data.items);
         setVideos(response.data.items);
     }
@@ -30,9 +30,9 @@ export default function App() {
         )
     }
 
-    function userSelectedVideo(videoId){
+    function userSelectedVideo(video){
         //update state variable selectedVideo
-        // const videoId = video.id.videoId
+        let videoId = video.id.videoId
         setSelectedVideo(videoId);
     }
     
@@ -65,3 +65,6 @@ export default function App() {
          );
 }
  
+//make get request by search term
+//use selectfunction to set first vid in list as vid
+//pass into videoplayer
