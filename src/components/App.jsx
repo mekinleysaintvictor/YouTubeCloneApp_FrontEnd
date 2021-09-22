@@ -60,8 +60,9 @@ export default function App() {
             <div>
                 <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
                 <VideoPlayer video={selectVideo} description={selectDescription}/>
+                <Comments video={selectVideo}/>
                 <VideoTable videos = {filteredVideos} userSelectedVideo={userSelectedVideo} userSelectedVideoDesc={userSelectedVideoDesc}/>
-                <Comments/>
+                
             </div>
             </React.Fragment>  
          );
