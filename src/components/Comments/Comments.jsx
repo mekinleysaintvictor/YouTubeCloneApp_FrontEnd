@@ -25,18 +25,17 @@ const Comments = (props) => {
 
     return ( 
         <center>
-        <div className="flex">
-            {console.log("State data: ", videoCommentsFromApi)}
-                {videoCommentsFromApi.map((video, index) => {
-                    return(
-                        <><><p key={index}>{video.comment}</p><input type="text" placeholder="reply..."></input></><button className="btn-danger" type="submit">Submit Reply</button><button className="like"/><button className="dislike"/></>
-                    )
-                })}
-                <div>
-                    <input type="text" placeholder="comment here..."></input><button className="btn-danger" type="submit">Submit Comment</button>
-                </div>
-               
-        </div>
+            <div className="flex">
+                {console.log("State data: ", videoCommentsFromApi)}
+                    {videoCommentsFromApi.map((video, index) => {
+                        return(
+                            <><><p key={index}>{video.comment}</p><input type="text" placeholder="reply..."></input></><button className="btn-danger" type="submit">Submit Reply</button><button className="like"/><button className="dislike"/></>
+                        )
+                    })}
+                    <div>
+                        <input type="text" placeholder="comment here..."></input><button className="btn-danger" type="submit">Submit Comment</button>
+                    </div>  
+            </div>
         </center>
      );
 }

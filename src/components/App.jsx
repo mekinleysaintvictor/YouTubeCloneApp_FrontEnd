@@ -5,13 +5,15 @@ import VideoPlayer from './VideoPlayer/VideoPlayer';
 import VideoTable from './VideoTable/VideoTable';
 import Videos from './Videos/Videos';
 import SearchBar from './SearchBar/SearchBar';
+import { Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 export default function App() {
     
     const [selectedVideo, setSelectedVideo] = useState('2DVpys50LVE');
     const [videos, setVideos] = useState([]); //related videos
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('lofi');
     const [filteredVideos, setFilteredVideos] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
     const [selectVideo, setSelectVideo] = useState([])
@@ -57,13 +59,28 @@ export default function App() {
 
         return ( 
             <React.Fragment>
-            <div>
-                <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
-                <VideoPlayer video={selectVideo} description={selectDescription}/>
-                <Comments video={selectVideo}/>
-                <VideoTable videos = {filteredVideos} userSelectedVideo={userSelectedVideo} userSelectedVideoDesc={userSelectedVideoDesc}/>
-                
-            </div>
+                <Container>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6 d-flex justify-content-center">
+                            <VideoPlayer video={selectVideo} description={selectDescription}/>
+                        </div>
+                        <div className="container col-sm-4">
+                            <VideoTable videos = {filteredVideos} userSelectedVideo={userSelectedVideo} userSelectedVideoDesc={userSelectedVideoDesc}/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-4">    
+                            <Comments video={selectVideo}/>  
+                        </div>
+                    </div>
+                </div> 
+                </Container>
             </React.Fragment>  
          );
 }

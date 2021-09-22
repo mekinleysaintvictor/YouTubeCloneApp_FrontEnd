@@ -7,7 +7,7 @@ const Videos = (props) => {
                 <td>{props.video.snippet.title}</td>
             </tr>
         </div>
-     );
+    );
 }
  
 export default Videos;

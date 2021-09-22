@@ -11,20 +11,19 @@ const VideoPlayer = (props) => {
     return ( 
         <center>
         <div className="container">
-                <div>
-                    <iframe id="ytplayer" type="text/html" width="640" height="360"
-                        src={`https://www.youtube.com/embed/${props.video}/`}
-                        frameBorder="0">
-                    </iframe>
-                </div>
-                <div className="card bg-danger text-white">
+            <div>
+                <iframe id="ytplayer" type="text/html" width="640" height="360"
+                    src={`https://www.youtube.com/embed/${props.video}/`}
+                    frameBorder="0">
+                </iframe>
+            </div>
+            <div className="card bg-danger text-white">
                 <h2 className="text-center">Video Description</h2>
                     <div>{props.description}</div>
-                </div>
-                
+            </div>     
         </div>
         </center>
-     );
+    );
 }
  
 export default VideoPlayer;
