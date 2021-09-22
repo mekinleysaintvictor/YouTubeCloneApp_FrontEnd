@@ -9,10 +9,13 @@ import SearchBar from './SearchBar/SearchBar';
 
 export default function App() {
     
-    const [selectedVideo, setSelectedVideo] = useState('2DVpys50LVE'); //selected video using video id, also requests our videos based on related search, mainly for vidplayer
-    const [videos, setVideos] = useState([]); //related videos from our api search 
-    const [search, setSearch] = useState(''); //searches through our existing 'box' of videos
-    const [filteredVideos, setFilteredVideos] = useState([]); //returns search based on our 'box' of videos
+    const [selectedVideo, setSelectedVideo] = useState('2DVpys50LVE');
+    const [videos, setVideos] = useState([]); //related videos
+    const [search, setSearch] = useState('');
+    const [filteredVideos, setFilteredVideos] = useState([]);
+    const [isLoading, setIsLoading] = useState(false)
+    const [selectVideo, setSelectVideo] = useState([])
+    const [selectDescription, setSelectDescription] = useState([])
 
 
     async function getVideos() {
@@ -21,19 +24,19 @@ export default function App() {
         setVideos(response.data.items);
     }
     
-    function mapVideos(){
-        return videos.map(video =>
-        <Videos
-            key={video.id}
-            video={video}
-        />    
-        )
+
+    function userSelectedVideo(videoId){
+        console.log('videoId', videoId)
+        let clickedVideo = videoId;
+        console.log('selected video', clickedVideo);
+        setSelectVideo(clickedVideo);
+        // udpdate state variable selectedVideo
     }
 
-    function userSelectedVideo(video){
-        //update state variable selectedVideo
-        let videoId = video.id.videoId
-        setSelectedVideo(videoId);
+    function userSelectedVideoDesc (video) {
+        let clickedDescription = video;
+        setSelectDescription(clickedDescription);
+
     }
     
     useEffect(() => {
@@ -55,11 +58,11 @@ export default function App() {
         return ( 
             <React.Fragment>
             <div>
-                <h1>Hello World</h1>
-                <SearchBar handleChange={(event) => setSearch(event.target.value)} />
-                <VideoPlayer video={selectedVideo} />
-                <VideoTable videos = {filteredVideos} />
-                <Comments/>
+                <SearchBar handleChange={(event) => setSearch(event.target.value)}/>
+                <VideoPlayer video={selectVideo} description={selectDescription}/>
+                <Comments video={selectVideo}/>
+                <VideoTable videos = {filteredVideos} userSelectedVideo={userSelectedVideo} userSelectedVideoDesc={userSelectedVideoDesc}/>
+                
             </div>
             </React.Fragment>  
          );
