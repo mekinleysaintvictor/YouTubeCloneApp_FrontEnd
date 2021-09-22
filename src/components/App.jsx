@@ -67,7 +67,7 @@ export default function App() {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-6 d-flex justify-content-center">
+                        <div className="container-fluid col-md-6 d-flex justify-content-center">
                             <VideoPlayer video={selectVideo} description={selectDescription}/>
                         </div>
                         <div className="container col-sm-4">
