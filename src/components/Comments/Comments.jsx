@@ -4,9 +4,11 @@ import axios from 'axios';
 
 const Comments = (props) => {
     const [videoCommentsFromApi, setVideoCommentsFromApi ] = useState([])
+    const [videoComment, setVideoComment] = useState([])
 
     useEffect(() => {
         getAllComments();
+        postComment();
     },[]);
 
     async function getAllComments() {
@@ -15,17 +17,23 @@ const Comments = (props) => {
         setVideoCommentsFromApi(response.data)
     }
 
+    function postComment () {
+        axios.post('http://127.0.0.1:8000/video/');
+        
+        
+    }
+
     return ( 
         <div>
             {props.video}
             {console.log("State data: ", videoCommentsFromApi)}
                 {videoCommentsFromApi.map((video, index) => {
                     return(
-                        <><p key={index}>{video.comment}</p><input type="text" placeholder="reply..."></input></>
+                        <><><p key={index}>{video.comment}</p><input type="text" placeholder="reply..."></input></><button type="submit">Submit Reply</button></>
                     )
                 })}
                 <div>
-                    <input type="text" placeholder="comment here..."></input>
+                    <input type="text" placeholder="comment here..."></input><button type="submit">Submit Comment</button>
                 </div>
                
         </div>
